@@ -18,5 +18,5 @@ class Part(models.Model):
     mark = models.ForeignKey(Mark, on_delete=models.CASCADE)
     model = models.ForeignKey(Model, on_delete=models.CASCADE)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    json_data = models.JSONField(default=dict)
+    json_data = models.JSONField(default=dict, null=True, blank=True)
     is_visible = models.BooleanField(default=True)

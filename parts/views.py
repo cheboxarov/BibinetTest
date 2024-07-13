@@ -49,6 +49,8 @@ def search_parts(request):
     total_count = Part.objects.filter(query).count()
     total_sum = Part.objects.filter(query).aggregate(Sum('price'))['price__sum']
 
+    if total_sum is None:
+        total_sum = '0'
     results = [
         {
             "mark": {"id": part.mark.id, "name": part.mark.name, "producer_country_name": part.mark.producer_country_name},
@@ -60,4 +62,4 @@ def search_parts(request):
         for part in parts
     ]
 
-    return JsonResponse({"response": results, "count": total_count, "summ": total_sum})
+    return JsonResponse({"response": results, "count": total_count, "summ": float(total_sum)})

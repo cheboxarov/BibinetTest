@@ -5,6 +5,7 @@ from faker import Faker
 
 fake = Faker()
 
+
 class Command(BaseCommand):
     help = 'Populate Part table with random data'
 
@@ -21,9 +22,9 @@ class Command(BaseCommand):
                 price=random.uniform(1000, 10000),
                 json_data={
                     'color': fake.color_name() if random.choice([True, False]) else None,
-                    'is_new_part': random.choice([True, False]),
-                    'count': random.randint(1, 10) if random.choice([True, False]) else None
-                },
+                    'is_new_part': random.choice([True, False]) if random.choice([True, False]) else None,
+                    'count': random.randint(0, 10) if random.choice([True, False]) else None,
+                } if random.choice([True, False]) else None,
                 is_visible=random.choice([True, False])
             )
             part.save()
